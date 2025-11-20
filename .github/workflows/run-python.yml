@@ -16,3 +16,11 @@ jobs:
 
       - name: Run Docker container
         run: docker run --rm test-image
+
+      - name: Login to DockerHub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Docker image to DockerHub
+        run: |
+          docker tag test-image ${{ secrets.DOCKER_USERNAME }}/test-image:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/test-image:latest
