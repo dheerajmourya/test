@@ -1,0 +1,20 @@
+name: Run Python Script
+
+on:
+  push:   # jab bhi tum code push karoge tab yeh chalega
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest   # robot ka operating system
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run script
+        run: python test.py
